@@ -1,5 +1,5 @@
 # Taller_2_PDC
-#### Somos Alejandro Bello, Malcom Quintero y Santiago Chirivi y somos el grupo de "Fenomenoides", adjunto nuestro logo: 
+#### Somos Alejandro Bello, Malcom Quintero y Rafa Chirivi y somos el grupo de "Fenomenoides", adjunto nuestro logo: 
 
 <details>
   <summary>Preparense para ver el grandioso logo:</summary>
