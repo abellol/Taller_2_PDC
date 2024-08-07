@@ -378,60 +378,61 @@ if __name__ == "__main__":
     ej_B = multiplo_3(B)
     print(ej_B) # nueva lista con los multiplos de 3: [0, 3, 6, 9, 12, 15, 999999, 10842630]
 ```
-#### Iterativa sin usar `%`
-```python
-def separar_digitos(numero) -> list: # Se utiliza la funcion de separar digitos ya declarada anteriormente
-    digitos = []
-    if numero < 0:
-        numero = -numero
-    while numero > 0:
-        digito = numero % 10
-        digitos.insert(0, digito)  
-        numero = numero // 10
-    return digitos
-
-def multiplo(lista:list) -> list:
-    """
-  La función multiplo_3 calcula que un numero  de un arreglo sea multiplo de 3 utilizando la propiedad de los multiplos de 3, donde la suma de sus digitos
-  también debe ser múltiplo de 3; por ellos se suman los digitos del numero inicial (para reducir el tamaño) para luego restarle 3 hasta que sea igual o menor que 3;
-  asi en caso de ser multiplo llegará a 0 y se guardará.
-  
-  Args:
-	Se ingresa el arreglo de numeros enteros, allí se verifica que el numero sea positivo (o se convierte) y luego se verifica
-    que sea un multiplo de 3  mediante el proceso ya explicadp para poder almacenarlo en la lista nueva.
-  
-  Returns:
-	La función retorna la nueva lista que solo contiene los multiplos de 3 que estan en el arreglo ingresado inicialmente o un mensaje en 
-    caso de no haber.
-    """
-    new_list = []
-    for element in lista:
-        digitos : list = separar_digitos(element)
-        suma : int= 0
-        for number in digitos:
-            suma += number
-        while suma >= 3: # resta hasta ser igual o menor que 3
-            suma -= 3
-            if suma == 0: # Si llega a 0 es multiplo de 3, se guarda en la lista de multiplos
-                new_list.append(element)
-            
-    return new_list if len(new_list) >=1 else "No hay multiplos de 3 en el arreglo"
-            
-if __name__ == "__main__":
-    A = [1, 2, 4, 8] 
-    B = [0, 3, 6, 9, -12, 15, 8, 999999] 
-
-    ej_A = multiplo(A)
-    print(ej_A) # mensaje donde dice que no se encontraron multiplos de 3
-
-    ej_B = multiplo(B)
-    print(ej_B)  # nueva lista con los multiplos de 3: [0, 3, 6, 9, -12, 15, 999999]
-```
-
-
+#### Reto...
 <details>
-<summary>Bonus...</summary>
-  11. Desarrollar un algoritmo que determine si una matriz es mágica. Se dice que una matriz cuadrada es mágica si la suma de cada una de sus filas, de cada una de sus columnas y de cada diagonal es igual.
+  <summary>Prueba de que no deben retarnos</summary>
+
+  ```python
+  def separar_digitos(numero) -> list: 
+      digitos = []
+      if numero < 0:
+          numero = -numero
+      while numero > 0:
+          digito = numero % 10
+          digitos.insert(0, digito)  
+          numero = numero // 10
+      return digitos
+
+  def multiplo(lista:list) -> list:
+      """
+    La función multiplo_3 calcula que un numero  de un arreglo sea multiplo de 3 utilizando la propiedad de los multiplos de 3, donde la suma de sus digitos
+    también debe ser múltiplo de 3; por ellos se suman los digitos del numero inicial (para reducir el tamaño) para luego restarle 3 hasta que sea igual o menor que 3;
+    asi en caso de ser multiplo llegará a 0 y se guardará.
+
+    Args:
+        Se ingresa el arreglo de numeros enteros, allí se verifica que el numero sea positivo (o se convierte) y luego se verifica
+        que sea un multiplo de 3  mediante el proceso ya explicadp para poder almacenarlo en la lista nueva.
+
+    Returns:
+        La función retorna la nueva lista que solo contiene los multiplos de 3 que estan en el arreglo ingresado inicialmente o un mensaje en 
+        caso de no haber.
+      """
+      new_list = []
+      for element in lista:
+          digitos : list = separar_digitos(element)
+          suma : int= 0
+          for number in digitos:
+              suma += number
+          while suma >= 3: 
+              suma -= 3
+              if suma == 0: 
+                  new_list.append(element)
+
+      return new_list if len(new_list) >=1 else "No hay multiplos de 3 en el arreglo"
+
+  if __name__ == "__main__":
+      A = [1, 2, 4, 8] 
+      B = [0, 3, 6, 9, -12, 15, 8, 999999] 
+
+      ej_A = multiplo(A)
+      print(ej_A) 
+
+      ej_B = multiplo(B)
+      print(ej_B) 
+```
+</details>
+
+#### 11. Desarrollar un algoritmo que determine si una matriz es mágica. Se dice que una matriz cuadrada es mágica si la suma de cada una de sus filas, de cada una de sus columnas y de cada diagonal es igual.
   
 ```python
 def imprimir_matriz(mat):
