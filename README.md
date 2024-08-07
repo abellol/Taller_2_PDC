@@ -1,5 +1,5 @@
 # Taller_2_PDC
-#### Somos Alejandro Bello, Malcom Carrillo y Rafael Chirivi y somos el grupo de "Fenomenoides", adjunto nuestro logo: 
+#### Somos Alejandro Bello, Malcom Carrillo y Rafael Chirivi y somos el grupo de "Fenomenoides", aquí les presentamos nuestro logo: 
 
 <details>
   <summary>Preparense para ver el grandioso logo:</summary>
@@ -11,7 +11,6 @@
 
 #### A continuación presentaremos la solución propuesta para cada numeral del taller:
 ### 1. Desarrollar un programa que ingrese un número entero n y separe todos los digitos que componen el número.
-
 
 ```python
 def separar_digitos(num:int) -> list:
@@ -144,8 +143,9 @@ if __name__ == "__main__":
         print("no has ingresado un numero real...")
 ```
 ### 5. Desarrollar un programa que permita determinar el Minimo Comun Multiplo de dos numeros enteros. Abordar el problema desde una perpectiva tanto iterativa como recursiva.
+#### Iterativa:
 ```python
-def mcm(num_1:int,num_2:int) -> float:
+def mcm(num_1:int,num_2:int) -> int:
     if num_1 >= num_2 : 
         dividendo = num_1 
         divisor = num_2
@@ -157,8 +157,34 @@ def mcm(num_1:int,num_2:int) -> float:
         dividendo = divisor
         divisor = residuo
         residuo = dividendo % divisor
-    return(num_1 * num_2)/(divisor)
+    print(divisor)
+    return(num_1 * num_2)//(divisor)
 
+if __name__ == "__main__":
+    try:
+        a = int(input("Ingrese el primer número: "))
+        b = int(input("Ingrese el segundo número: "))
+        mcm_ = mcm(a, b)
+        print(f"el MCM entre {a} y {b} es {mcm_}")
+    except ValueError:
+        print("el caracter ingresado no es un numero entero...")
+```
+#### Recursiva
+```python
+def mcd(num_1:int,num_2:int) -> int:
+    if num_1 >= num_2 : 
+        dividendo = num_1 
+        divisor = num_2
+    else: 
+        dividendo = num_2
+        divisor = num_1
+
+    if divisor == 0:
+        return num_1
+    return  mcd(divisor, dividendo % divisor)
+
+def mcm(num_1, num_2) -> int:
+    return (num_1 * num_2) // (mcd(num_1, num_2))
 
 if __name__ == "__main__":
     try:
@@ -198,6 +224,50 @@ if __name__ == "__main__":
 ```
 ### 7. Desarrollar un programa que determine si en una lista se encuentra una cadena de caracteres con dos o más vocales. Si la cadena existe debe imprimirla y si no existe debe imprimir 'No existe'.
 ```python
+def vowel_here(lista : list):
+    """
+	Esta función de Python verifica cuantas vocales hay en cada elemento dentro de un arreglo.
+  
+  Args:
+    La función vowel_here toma un arreglo como entrada y cuenta el
+  	número de vocales en las palabras (cadenas de caracteres). Las vocales se definen en la variable "vowels"
+  
+  Returns:
+    La función vowel_here devuelve una cadena que indica las palabras que contienen 2 o más vocales
+  	encontradas en la lista de entrada. La cadena devuelta indicará las palabras que tienen 2 o más vocales
+    	dentro de una lista.
+	"""
+    
+    vowels = "aeiou" # vocales definidas
+    palabras = [] # lista para palabras que cumplen la condición 
+    for element in lista:
+        word = str(element).lower() # se evalua todo como string y en minuscula
+        contador: int = 0
+        for letter in word:
+          if letter in vowels:
+            contador+= 1
+        if contador>= 2:
+            palabras.append(element)
+
+    if len(palabras) > 0:
+      return (f"en la lista {lista} \nlas palabras en la lista con 2 o mas vocales son: {palabras}\n") # String si encuentra la palabra que cumple
+    else:
+        return (f"en la lista {lista}\nno hay palabras con dos o mas vocales en la lista\n")   # string si ninguna palabra cumple
+        
+if __name__ == "__main__":
+    try:       
+        # Se declaran e inicializan dos listas con elementos heterogeneos como ejemplo
+        A : list = ["hola", 15, "hell0", "CHAos"]
+        C : list = [18, "14", "hells", "CH4os"]
+        
+        vocales = vowel_here(A)
+        print(vocales) # encuentra palabras con dos o mas vocales
+
+        vocales_2 = vowel_here(C)
+        print(vocales_2) # no encuentra ninguna palabra con tales propiedades
+        
+    except ValueError:
+        print("algun caracter ingresado no es valido...")
 
 ```
 ### 8. Desarrollar un programa que dadas dos listas determine que elementos tiene la primer lista que no tenga la segunda lista.
@@ -281,20 +351,36 @@ if __name__ == "__main__":
 ```
 
 ### 10. Suponga que se tiene una lista A con ciertos números enteros. Desarrolle una función que, independientemente de los números que se encuentran en la lista A, tome aquellos números que son múltiplos de 3 y los guarde en una lista nueva, la cual debe ser retornada por la función. Implemente la perspectiva de un patrón de acumulación y también de comprensión de listas.
+#### List comprehension utilizando el operador `%` 
 ```python
 def multiplo_3(lista:list) -> list:
-    new_list = [-x if x < 0 else x for x in lista if x%3==0]
-    return new_list
+    """
+  La función multiplo_3 calcula que un numero  de un arreglo sea multiplo de 3 para guardarlo en otra lista.
+  
+  Args:
+	Se ingresa el arreglo de numeros enteros, allí se verifica que el numero sea positivo (o se convierte) y luego se verifica
+    que sea un multiplo de 3 para poder almacenarlo en la lista nueva.
+  
+  Returns:
+	La función retorna la nueva lista que solo contiene los multiplos de 3 que estan en el arreglo ingresado inicialmente o un mensaje en 
+    caso de no haber.
+    """
+    new_list = [-x if x < 0 else x for x in lista if x%3==0] # creacion de la lista con list comprehension
+    return new_list if len(new_list) >= 1 else "No hay multiplos de 3 en el arreglo"
 
 if __name__ == "__main__":
+	# Se declaran dos arreglos iniciales para comprobar el funcionamiento de la función
     A = [1, 2, 4, 8]
     B = [0, 3, 6, 9, 12, -15, 8,-999999, 10842630]
 
-    d = multiplo_3(B)
-    print(d)
-``` 
+    ej_A = multiplo_3(A)
+    print(ej_A) # mensaje donde dice que no se encontraron multiplos de 3
+    ej_B = multiplo_3(B)
+    print(ej_B) # nueva lista con los multiplos de 3: [0, 3, 6, 9, 12, 15, 999999, 10842630]
+```
+#### Iterativa sin usar `%`
 ```python
-def separar_digitos(numero) -> list:
+def separar_digitos(numero) -> list: # Se utiliza la funcion de separar digitos ya declarada anteriormente
     digitos = []
     if numero < 0:
         numero = -numero
@@ -302,29 +388,44 @@ def separar_digitos(numero) -> list:
         digito = numero % 10
         digitos.insert(0, digito)  
         numero = numero // 10
-
     return digitos
 
-def multiplo(lista:list) -> list: # resta apenas se suman los digitos
+def multiplo(lista:list) -> list:
+    """
+  La función multiplo_3 calcula que un numero  de un arreglo sea multiplo de 3 utilizando la propiedad de los multiplos de 3, donde la suma de sus digitos
+  también debe ser múltiplo de 3; por ellos se suman los digitos del numero inicial (para reducir el tamaño) para luego restarle 3 hasta que sea igual o menor que 3;
+  asi en caso de ser multiplo llegará a 0 y se guardará.
+  
+  Args:
+	Se ingresa el arreglo de numeros enteros, allí se verifica que el numero sea positivo (o se convierte) y luego se verifica
+    que sea un multiplo de 3  mediante el proceso ya explicadp para poder almacenarlo en la lista nueva.
+  
+  Returns:
+	La función retorna la nueva lista que solo contiene los multiplos de 3 que estan en el arreglo ingresado inicialmente o un mensaje en 
+    caso de no haber.
+    """
     new_list = []
     for element in lista:
-        digitos = separar_digitos(element)
-        suma = 0
+        digitos : list = separar_digitos(element)
+        suma : int= 0
         for number in digitos:
             suma += number
-        while suma >= 3:
+        while suma >= 3: # resta hasta ser igual o menor que 3
             suma -= 3
-            if suma == 0:
+            if suma == 0: # Si llega a 0 es multiplo de 3, se guarda en la lista de multiplos
                 new_list.append(element)
             
-    return new_list
+    return new_list if len(new_list) >=1 else "No hay multiplos de 3 en el arreglo"
             
 if __name__ == "__main__":
-    A = [1, 2, 4, 8]
-    B = [0, 3, 6, 9, 12, 15, 8, 999999]
+    A = [1, 2, 4, 8] 
+    B = [0, 3, 6, 9, -12, 15, 8, 999999] 
 
-    d = multiplo(B)
-    print(d)
+    ej_A = multiplo(A)
+    print(ej_A) # mensaje donde dice que no se encontraron multiplos de 3
+
+    ej_B = multiplo(B)
+    print(ej_B)  # nueva lista con los multiplos de 3: [0, 3, 6, 9, -12, 15, 999999]
 ```
 
 
@@ -334,10 +435,34 @@ if __name__ == "__main__":
   
 ```python
 def imprimir_matriz(mat):
+  """
+  La función imprime cada fila de una matriz (arreglo de arreglos de la misma dimensión).
+  
+  Args:
+	Se ingresa el arreglo de forma lineal, luego imprime cada arreglo (fila) para hacer mas visual
+    el arreglo.
+  
+  Returns:
+	La función no retorna nada en específico.
+  """
   for i in mat:
-    print (i)
-def matriz_magica(matriz_1):
-    x = len(matriz_1) - 1
+      print (i)
+      
+    
+def matriz_magica(matriz_1) -> str:
+    """
+  	La función evalúa la suma de cada fila, columna y diagonal de una matriz cuadrada dada para establecer
+    si es o no una matriz mágica.
+  
+  	Args: 
+      Al inicio se declaran variables inicializadas en 0, donde se guardará la suma de los valores en cada dimensión y también un valor booleano (magic) que será el encargado de devolver
+      la información en caso de que sea o no magica la matriz. Mediante bucles se acumulan las sumas siguiendo el patrón de acceso para cada dimensión mediante sus indices; el total de la suma
+      en cada dimensión se guarda en una lista específica para tener el registro de los valores obtenidos.
+
+  	Returns:
+	  La función retorna un string con la información de la suma de cada dimensión, indicando si es o no mágica.
+ 	"""
+    x = len(matriz_1) - 1 # variable auxiliar para acceder a la diagonal que tiene pendiente positiva (/)
     fila= []
     columna = []
     diagonales = []
@@ -348,7 +473,7 @@ def matriz_magica(matriz_1):
         sumafila = 0
         sumacolumna = 0
         sumad1 += (matriz_1[i][i])
-        sumad2 += (matriz_1[i][i+x])
+        sumad2 += (matriz_1[i][i+x]) # acceder a los valores gracias a la variable auxiliar
         x -= 2
         for j in range(len(matriz_1[0])):
             sumafila += (matriz_1[i][j])
@@ -366,18 +491,20 @@ def matriz_magica(matriz_1):
                 break
             break
     if magic == True:
-        return (f"Es una matriz magica con suma en \nfilas: {fila} \ncolumnas: {columna} \ndiagonales: {diagonales}\n")
+        return (f"Es una matriz magica con suma en \nfilas: {fila} \ncolumnas: {columna} \ndiagonales: {diagonales}\n") # String de matriz mágica
     else:
-        return (f"No es una matriz magica con suma en \nfilas: {fila} \ncolumnas: {columna} \ndiagonales: {diagonales}\n")
+        return (f"No es una matriz magica con suma en \nfilas: {fila} \ncolumnas: {columna} \ndiagonales: {diagonales}\n") # String matriz no magica
 
 if __name__ == "__main__":
+    # Se declaran en inicializan matrices cuadradas de ejemplo
 	matriz_1 = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 	matriz_2 = [[4, 9, 2], [3, 5, 7], [8, 1, 6]]
+    
 	imprimir_matriz(matriz_1)
-	print(matriz_magica(matriz_1))
+	print(matriz_magica(matriz_1)) # return string de no matriz mágica
 	print("-------------------------------- \n")
 	imprimir_matriz(matriz_2)
-	print(matriz_magica(matriz_2))
+	print(matriz_magica(matriz_2)) # return String de matriz mágica
 ```
 
 
