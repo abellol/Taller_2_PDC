@@ -31,17 +31,40 @@ if __name__ == "__main__":
 ### 2. Desarrollar un programa que ingrese un número flotante n y separe su parte entera de la parte decimal, y luego entregue los dígitos tanto de la parte entera como de la decimal.
 ```python
 def separar_digitos(numero) -> list:
-    digitos = []
+    """
+	Esta función separa los digitos de un numero en un arreglo en el que cada elemento es uno de los digitos
+  
+  Args:
+    Esta función toma como entrada un número entero y de manera iterativa opera el numero hasta remover los digitos del numero
+	agregandolos a un arreglo 
+  
+  Returns:
+    La función retorna un arreglo en el que los elementos son cada digito del numero ingresado en orden
+	"""
+
+    digitos = [] 
     while numero > 0:
         digito = numero % 10
-        digitos.insert(0, digito)  
-        numero = numero // 10
+        digitos.insert(0, digito) #Inserta digito como el primer elemento del arreglo  
+        numero = numero // 10 
     return digitos
 
 def parts(number:float) -> str:
+
+    """
+	La función parts separa la parte entera de un numero real de su parte decimal
+  
+  Args:
+    La función toma un numero real o flotante como su entrada, separando primero la parte entera del numero para posteriormente operar la decimal y convertirla en entera
+	antes de aplicar la función separar_digitos a ambas partes
+  
+  Returns:
+    La función retorna un string que muestra los arreglos de la parte entera y la parte decimal del numero
+	"""
+
     integer = int(number)
     decimal = number - integer
-    while decimal != int(decimal):
+    while decimal != int(decimal): #Iterar hasta que todos los digitos de la parte decimal hagan parte del entero 
         decimal *= 10
     decimals = separar_digitos(int(decimal))
     integers = separar_digitos(integer)
@@ -49,10 +72,11 @@ def parts(number:float) -> str:
 
 if __name__ == "__main__":
     try:
+	# se pide ingresar un numero real y se asegura que la variable almacene la entrada como un flotante positivo
         num = abs(float(input("ingrese un numero real:  ")))
         digits = parts(num)
         print(digits)
-    except ValueError:
+    except ValueError: #Evaluar si ocurre error debido a que lo ingresado era diferente a un numero
         print("no ha ingresado un numero real...")
 ```
 ### 3. Desarrollar un programa que permita ingresar dos números enteros y determinar si se tratan de números espejos, definiendo números espejos como dos números a y b tales que a se lee de izquierda a derecha igual que se lee b de derecha a izquierda, y viceversa.
@@ -91,8 +115,18 @@ cos(x) \approx cos(x,n) \approx \sum_{i=0}^{n} (-1)^i \frac{x^{2i}}{(2i)!}
 ```
 
 ```python
-import math
+import math # Se importa el modulo math para la función de coseno
 def cos_aproximada(x : float, n : int) -> float:
+ """
+	La función cos_aproximada calcula una aproximación al coseno usando la serie de Taylor
+  
+  Args:
+    Las entradas de la función son x como el numero real del cual se obtendrá el coseno y un numero n entero que representa 
+  
+  Returns:
+    La función retorna un string que muestra los arreglos de la parte entera y la parte decimal del numero
+	"""
+
     suma : float = 0
     for i in range (0,n+1):
         arg = 2 * i
