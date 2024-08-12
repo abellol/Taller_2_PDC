@@ -13,19 +13,19 @@
 ### 1. Desarrollar un programa que ingrese un número entero n y separe todos los digitos que componen el número.
 
 ```python
-def separar_digitos(num:int) -> list:
-    digits = []
-    while num > 0:
-        digit = num % 10
-        digits.insert(0, digit)
-        num //= 10
+def separar_digitos(num:int) -> list:	# se define la funcion "separar_digitos"
+    digits = []				# se establece una lista en donde registrar los digitos del numero
+    while num > 0:			# condicion para que el numero tenga al menos 1 digito
+        digit = num % 10		# se obtiene el residuo de dividir entre 10 al numero, dandonos asi el ultimo digito
+        digits.insert(0, digit)		# se inserta en la primera posicion de la lista el digito obtenido
+        num //= 10			# se remueve ese ultimo digito haciendo division exacta entre 10 
     return digits
 if __name__ == "__main__":
-    try: 
-        num = abs(int(input("ingrese un numero entero:  ")))
-        digitos = separar_digitos(num)
-        print(digitos)
-    except ValueError:
+    try: 							# limite para ingreso de valores
+        num = abs(int(input("ingrese un numero entero:  ")))	# ingreso del numero entero, con funcion de absoluto para incluir numeros positivos o negativos
+        digitos = separar_digitos(num)				# llamada a la funcion sobre la variable recien ingresada
+        print(digitos)						# impresion de la lista de digitos 
+    except ValueError:						# en caso de ingreso de datos diferente al de numeros enteros
         print("no se ha ingresado un numero entero...")
 ```
 ### 2. Desarrollar un programa que ingrese un número flotante n y separe su parte entera de la parte decimal, y luego entregue los dígitos tanto de la parte entera como de la decimal.
@@ -81,32 +81,32 @@ if __name__ == "__main__":
 ```
 ### 3. Desarrollar un programa que permita ingresar dos números enteros y determinar si se tratan de números espejos, definiendo números espejos como dos números a y b tales que a se lee de izquierda a derecha igual que se lee b de derecha a izquierda, y viceversa.
 ```python
-def num_espejo(num_1:int, num_2:int) -> str:
-    txt_1 = str(num_1)
-    txt_2 = str(num_2)
-    espejo : bool = True
-    if len(txt_1) == len(txt_2):
-        for n in range (1, len(txt_1)+1):
-            if (txt_1[n-1]) != (txt_2[-n]):
-                espejo = False
+def num_espejo(num_1:int, num_2:int) -> str:			# se define la funcion "num_espejo"
+    txt_1 = str(num_1)						# se convierte a texto el primer numero y se asigna a txt_1
+    txt_2 = str(num_2)						# se convierte a texto el segundo numero y se asigna a txt_2
+    espejo : bool = True					# se establece una variable de tipo booleano para la comparacion de los numeros
+    if len(txt_1) == len(txt_2):				# condicion para que la longitud de la cadena (numero de digitos) sea la misma
+        for n in range (1, len(txt_1)+1):			# recorrido para los digitos de los numeros
+            if (txt_1[n-1]) != (txt_2[-n]):			# comparacion de los digitos (primero con ultimo, segundo con penultimo...)
+                espejo = False					# si se cumple que alguno de los numeros no es igual, se declara el booleano como falso
                 break
-            else:
+            else:						# caso contrario, donde todos los numeros coinciden en sus posiciones contrarias, booleano como verdadero
                 espejo = True
-    else:
+    else:							# si se determina que los numeros no tienen la misma cantidad de digitos, el booleano tambien es falso
         espejo = False
     
     if espejo == True:
-        return(f"los numeros {num_1} y {num_2} son espejos!")
+        return(f"los numeros {num_1} y {num_2} son espejos!")	# retorno para booleano verdadero
     else:
-        return(f"los numeros {num_1} y {num_2} no son espejos...")  
+        return(f"los numeros {num_1} y {num_2} no son espejos...")  # retorno para booleano falso
 
 if __name__ == "__main__":
-    try:
-        num_1 = int(input("ingrese un numero entero:  "))
-        num_2 = int(input("ingrese un numero entero:  "))
-        espejos= num_espejo(num_1, num_2)
-        print(espejos)
-    except ValueError:
+    try:							# limite para ingreso de valores
+        num_1 = int(input("ingrese un numero entero:  "))	# ingreso del primer numero
+        num_2 = int(input("ingrese un numero entero:  "))	# ingreso del segundo numero
+        espejos= num_espejo(num_1, num_2)			# se asigna a una variable la aplicacion de la funcion sobre los numeros ingresados
+        print(espejos)						# impresion del resultado de la funcion
+    except ValueError:						# en caso de ingreso de datos diferente al de numeros enteros
         print("No has ingresado un numero entero...") 
 ```
 ### 4. Diseñar una función que permita calcular una aproximación de la función coseno alrededor de 0 para cualquier valor x (real), utilizando los primeros n términos de la serie de Taylor. nota: use math para traer la función coseno y mostrar la diferencia entre el valor real y la aproximación. Calcule con cuántos términos de la serie (i.e: cuáles valores de n), se tienen errores del 10%, 1%, 0.1% y 0.001%. 
@@ -179,54 +179,54 @@ if __name__ == "__main__":
 ### 5. Desarrollar un programa que permita determinar el Minimo Comun Multiplo de dos numeros enteros. Abordar el problema desde una perpectiva tanto iterativa como recursiva.
 #### Iterativa:
 ```python
-def mcm(num_1:int,num_2:int) -> int:
-    if num_1 >= num_2 : 
+def mcm(num_1:int,num_2:int) -> int:	# se define la funcion "mcm" iterativa
+    if num_1 >= num_2 : 		# condicion para establecer al dividendo y divisor en donde el primer numero es mayor al segundo
         dividendo = num_1 
         divisor = num_2
-    else: 
+    else: 				# condicion para establecer al dividendo y divisor en donde el segundo numero es mayor al primero
         dividendo = num_2
         divisor = num_1
-    residuo = dividendo % divisor
-    while residuo != 0:
-        dividendo = divisor
-        divisor = residuo
-        residuo = dividendo % divisor
-    print(divisor)
-    return(num_1 * num_2)//(divisor)
+    residuo = dividendo % divisor	# asignacion del residuo para los valores
+    while residuo != 0:			# condicion de bucle mientras el residuo no sea 0
+        dividendo = divisor		# reemplazo de dividendo con divisor
+        divisor = residuo		# reemplazo de divisor con residuo
+        residuo = dividendo % divisor	# recalcular el residuo para evaluar el bucle una vez mas
+    print(divisor)			# se imprime el divisor con el cual se calculara el mcm (n1 * n2)//(mcd)
+    return(num_1 * num_2)//(divisor)	# se retorna el valor del mcm calculado
 
-if __name__ == "__main__":
-    try:
-        a = int(input("Ingrese el primer número: "))
-        b = int(input("Ingrese el segundo número: "))
-        mcm_ = mcm(a, b)
-        print(f"el MCM entre {a} y {b} es {mcm_}")
-    except ValueError:
+if __name__ == "__main__":				
+    try:						# limite para ingreso de valores
+        a = int(input("Ingrese el primer número: "))	# ingreso del primer numero
+        b = int(input("Ingrese el segundo número: "))	# ingreso del segundo numero
+        mcm_ = mcm(a, b)				# se añade a una variable la aplicacion de la funcion sobre los numeros ingresados
+        print(f"el MCM entre {a} y {b} es {mcm_}")	# se imprime el mcm de ambos numeros ingresados
+    except ValueError:					# en caso de ingreso de datos diferente al de numeros enteros
         print("el caracter ingresado no es un numero entero...")
 ```
 #### Recursiva
 ```python
-def mcd(num_1:int,num_2:int) -> int:
-    if num_1 >= num_2 : 
+def mcd(num_1:int,num_2:int) -> int:		# se define la funcion "mcd" recursiva
+    if num_1 >= num_2 : 			# condicion para establecer al dividendo y divisor en donde el primer numero es mayor al segundo y aplicar la funcion recursiva
         dividendo = num_1 
         divisor = num_2
-    else: 
+    else: 					# condicion para establecer al dividendo y divisor en donde el segundo numero es mayor al primero y aplicar la funcion recursiva
         dividendo = num_2
         divisor = num_1
 
-    if divisor == 0:
+    if divisor == 0:				# caso base en donde el divisor es 0
         return num_1
-    return  mcd(divisor, dividendo % divisor)
+    return  mcd(divisor, dividendo % divisor)	# retorno de funcion recusriva tomando al divisor anterior y el residuo obtenido, para asi llegar al caso base
 
-def mcm(num_1, num_2) -> int:
-    return (num_1 * num_2) // (mcd(num_1, num_2))
+def mcm(num_1, num_2) -> int:				# se define la funcion "mcm"
+    return (num_1 * num_2) // (mcd(num_1, num_2))	# se retorna la operacion (n1 * n2) // (mcd)
 
 if __name__ == "__main__":
-    try:
-        a = int(input("Ingrese el primer número: "))
-        b = int(input("Ingrese el segundo número: "))
-        mcm_ = mcm(a, b)
-        print(f"el MCM entre {a} y {b} es {mcm_}")
-    except ValueError:
+    try:						# limite para ingreso de valores
+        a = int(input("Ingrese el primer número: "))	# ingreso del primer numero
+        b = int(input("Ingrese el segundo número: "))	# ingreso del segundo numero
+        mcm_ = mcm(a, b)				# se asigna a una variable la aplicacion del funcion sobre los dos numeros ingresados
+        print(f"el MCM entre {a} y {b} es {mcm_}")	# se imprime el mcm de ambos numeros ingresados
+    except ValueError:					# en caso de ingreso de datos diferente al de numeros enteros
         print("el caracter ingresado no es un numero entero...")
 ```
 ### 6. Desarrollar un programa que determine si en una lista existen o no elementos repetidos.
@@ -329,58 +329,65 @@ if __name__ == "__main__":
 
 ### 9. Resolver el punto 7 del taller 1 usando operaciones con vectores.
 ```python
-def promedio(lista:list) -> float:
-  suma : float = 0
-  for n in lista:
-    suma += n
-  prom = suma / len(lista)
-  return (f"El promedio de su lista {lista} es de: {prom}")
-def mediana(lista:list) -> float:
-  lista.sort()
-  if (len(lista) % 2) == 0:
-    num = lista[len(lista)//2] + lista[(len(lista)//2) - 1]
-    med = num / 2
-    return (f"la mediana de su lista {lista} datos es: {med}")
-  else:
-    med = lista[len(lista)//2]
-    return (f"la mediana de su lista {lista} datos es: {med}")
-def prom_multi(lista : list) -> float:
-	multi : float = 1
-	for n in lista:
-		multi *= n
-	prom = multi ** (1/len(lista))
-	return (f"el promedio multiplicativo de la lista {lista} es: {prom}")
-def asce(lista:list) -> list:
-	lista.sort()
-	return (f"la lista ordenada de forma ascendente es: {lista}")
-def desc(lista:list) -> list:
-  lista.sort(reverse=True)
-  return (f"la lista ordenada de forma descendente es: {lista}")
-def potencia_extremos(lista:list) -> float:
-  lista.sort()
-  base = lista[-1]
-  exponente = lista[0]
-  pot = base ** exponente
-  return (f"{base} ^ {exponente} = {pot}")
-def raiz_menor(lista:list)->float:
-	lista.sort()
-	raiz = lista[0] ** (1/3)
-	return (f"la raíz cubica del menor elementro dentro de la lista ({lista[0]}) es: {raiz}")
+def promedio(lista:list) -> float:				# se define la funcion "promedio"
+  suma : float = 0						# se establece una variable de tipo flotante (decimal) donde se acumularan la suma de los datos del vector
+  for n in lista:						# se recorre los datos de la lista
+    suma += n							# se suman los datos a la variable
+  prom = suma / len(lista)					# se calcula el promedio como la sumatoria de los datos dividido el numero de datos 
+  return (f"El promedio de su lista {lista} es de: {prom}")	# se retorna el promedio de la lista
+
+def mediana(lista:list) -> float:				# se define la funcion "mediana"
+  lista.sort()							# se ordena la lista de menor a mayor
+  if (len(lista) % 2) == 0:					# condicion donde los datos de la lista son pares
+    num = lista[len(lista)//2] + lista[(len(lista)//2) + 1]	# se realiza la suma de los datos de la mitad de la lista 
+    med = num / 2						# se promedia la suma de los datos (entre 2)
+    return (f"la mediana de su lista {lista} datos es: {med}")	# se retorna la mediana 
+  else:								# caso donde la cantidad de datos es impar
+    med = lista[(len(lista)//2)+1]				# se asigna la mediana igual al valor del dato en la mitad de la lista, misma cantidad de datos a izquierda y derecha
+    return (f"la mediana de su lista {lista} datos es: {med}")	# se retorna la mediana
+
+def prom_multi(lista : list) -> float:						# se define la funcion "prom_multi"
+	multi : float = 1							# se declara una variable para poder multiplicar los valores de los datos de la lista
+	for n in lista:								# se recorre la lista
+		multi *= n							# se multiplica el valor del dato a la variable mult
+	prom = multi ** (1/len(lista))						# se calcula el promedio como la raiz del numero de datos sobre la multiplicacion de los datos
+	return (f"el promedio multiplicativo de la lista {lista} es: {prom}")	# se imprime el promedio
+
+def asce(lista:list) -> list:						# se define la funcion "asce"
+	lista.sort()							# se aplica el arreglo de orden de menor a mayor
+	return (f"la lista ordenada de forma ascendente es: {lista}")	# se imprime la lista arreglada
+
+def desc(lista:list) -> list:						# se define la funcion "desc"
+  lista.sort(reverse=True)						# se aplica el arreglo de orden de mayor a menor
+  return (f"la lista ordenada de forma descendente es: {lista}")	# se imprime la lista arreglada
+
+def potencia_extremos(lista:list) -> str:	# se define la funcion "potencia_extremos" 
+  lista.sort()					# se organiza la lista de menor a mayor 
+  base = lista[-1]				# se toma como base el ultimo dato de la lista
+  exponente = lista[0]				# se toma como exponente el primer dato de lista
+  pot = base ** exponente			# se asigna a una variable el resultado del ultimo dato elevado al primer dato 
+  return (f"{base} ^ {exponente} = {pot}")	# se retorna el resultado como un string que presenta la operacion base ^ exponente = potencia
+
+def raiz_menor(lista:list)-> str:									# se define la funcion "raiz_menor"
+	lista.sort()											# se organiza la lista de menor a mayor
+	raiz = lista[0] ** (1/3)									# se asigna a una variable la operacion de la raiz cubica del dato mas pequeño
+	return (f"la raíz cubica del menor elementro dentro de la lista ({lista[0]}) es: {raiz}")	# se retorna un string que presenta la operacion
+
 if __name__ == "__main__":
-    try:
-        lista = []
-        for i in range(1, 7):
-            x = int(input(f"Ingrese el dato {i}:  "))
-            lista.append(x)
+    try:						# limite para ingreso de valores
+        lista = []					# se define una lista vacia para ingresar los datos
+        for i in range(1, 6):				# se repite la operacion 5 veces (de 1 a 6 excluyendo el 5)
+            x = int(input(f"Ingrese el dato {i}:  "))	# se ingresa un dato para la lista
+            lista.append(x)				# se añade ese dato a la lista
             
-        print (promedio(lista))
-        print (mediana(lista))
-        print (prom_multi(lista))
-        print (asce(lista))
-        print (desc(lista))
-        print (potencia_extremos(lista))
-        print (raiz_menor(lista))
-    except ValueError:
+        print (promedio(lista))				# se aplica la funcion promedio a la lista generada
+        print (mediana(lista))				# se aplica la funcion mediana a la lista generada
+        print (prom_multi(lista))			# se aplica la funcion promedio multiplicativo a la lista generada
+        print (asce(lista))				# se aplica la funcion orden ascendente a la lista generada
+        print (desc(lista))				# se aplica la funcion orden descendente a la lista generada
+        print (potencia_extremos(lista))		# se aplica la funcion potencia del ultimo dato elevado al primer dato a la lista generada
+        print (raiz_menor(lista))			# se aplica la funcion raiz cubica del numero menor a la lista generada
+    except ValueError:					# en caso de ingreso de datos diferente al de numeros enteros
         print("no has ingresado un numero entero...")
 ```
 
