@@ -121,10 +121,10 @@ def cos_aproximada(x : float, n : int) -> float:
 	La función cos_aproximada calcula una aproximación al coseno usando la serie de Taylor
   
   Args:
-    Las entradas de la función son x como el numero real del cual se obtendrá el coseno y un numero n entero que representa 
+    Las entradas de la función son x como el numero real del cual se obtendrá el coseno y un numero n entero que representa el n termino o iteración de la serie de Taylor 
   
   Returns:
-    La función retorna un string que muestra los arreglos de la parte entera y la parte decimal del numero
+    La función retorna el resultado de la operación de la sumatoria en esta iteración de la serie
 	"""
 
     suma : float = 0
@@ -139,6 +139,15 @@ def cos_aproximada(x : float, n : int) -> float:
     return suma
 
 def margen_error(real : float, aprox : float) -> float:
+ """
+	Esta función calcula el margen de error del coseno obtenido por el aproximado con la serie de Taylor
+  
+  Args:
+    
+  
+  Returns:
+    
+	"""
     if real == 0:
         return 0
     numerador = (abs(real - aprox))
