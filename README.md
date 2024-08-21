@@ -143,26 +143,36 @@ def margen_error(real : float, aprox : float) -> float:
 	Esta función calcula el margen de error del coseno obtenido por el aproximado con la serie de Taylor
   
   Args:
-    
+    Los argumentos recibidos son real, que es el coseno real obtenido por el modulo math, y aprox el coseno
+	 obtenido de la función cos_aproximada ambos como flotantes
   
   Returns:
-    
+    Retorna el error calculado
 	"""
     if real == 0:
         return 0
-    numerador = (abs(real - aprox))
+    numerador = (abs(real - aprox)) # Se calcula la diferencia entre el valor real y el aproximado
     denominador = real
     error : float = numerador / denominador * 100
-    if denominador > 0:
+    if denominador > 0: #confirmar output positivo
         return error
     else:
        return -error
     
 def calcular_terminos(x:float, porcentaje_error:float) -> str:
+"""
+	La función calcular_terminos es la que obtiene todos los elementos de la respuesta que se le da al usuario
+  
+  Args:
+    A la función entra x que es el numero del cual se va a calcular el seno y el porcentaje de error con el que lo está calculando
+  
+  Returns:
+    La función retorna un texto con el valor real, estimado, numero de iteraciones y porcentaje de error del coseno del numero x ingresado
+	"""
     real = math.cos(x)
     i = 1
     error = float(100) # el error inicia en el 100%
-    while  error >= porcentaje_error:
+    while  error >= porcentaje_error: #Repetir hasta alcanzar el porcentaje de error ingresado como argumento
         aprox = cos_aproximada(x, i)
         error = margen_error(real, aprox)
         i+=1
@@ -182,7 +192,7 @@ if __name__ == "__main__":
         for porcentaje_error in porcentaje_errores:
             print(calcular_terminos(x, porcentaje_error))
             
-    except ValueError:
+    except ValueError: #Prevenir la entrada de un dato no numerico
         print("no has ingresado un numero real...")
 ```
 ### 5. Desarrollar un programa que permita determinar el Minimo Comun Multiplo de dos numeros enteros. Abordar el problema desde una perpectiva tanto iterativa como recursiva.
@@ -316,7 +326,16 @@ if __name__ == "__main__":
 ### 8. Desarrollar un programa que dadas dos listas determine que elementos tiene la primer lista que no tenga la segunda lista.
 ```python
 def no_repetidos(lista_1:list, lista_2:list):
-    c = lista_1.copy()
+"""
+	Esta función identifica los elementos repetidos entre listas
+  
+  Args:
+    Como entradas la función recibe las 2 listas que van a ser operadas 
+  
+  Returns:
+    la función retorna un texto con formato que incluye las 2 listas y los elementos no repetidos
+	"""
+    c = lista_1.copy() #Crea una copia de la lista para conservar solo los elementos que no estene en la otra lista
     for element in lista_1:
         for i in range(len(lista_2)):
             if element == lista_2[i]:
